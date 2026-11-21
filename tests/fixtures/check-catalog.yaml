@@ -126,7 +126,7 @@ platforms:
 
   meta:
     reference: ads/references/meta-audit.md
-    total_checks: 72
+    total_checks: 73
     skill: ads-meta
     audit_agent: audit-meta
     check_ids:
@@ -203,6 +203,7 @@ platforms:
       - M70
       - M71
       - M72
+      - M73
 
   linkedin:
     reference: ads/references/linkedin-audit.md

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Meta control `M73` (fake-winner attribution shift) checks whether a reported
+  creative winner added account outcomes or only took attribution from stable
+  ads. It needs evidence from outside Meta (backend totals, blended MER) or a lift
+  result, and labels the mechanism as inference rather than a Meta-stated fact.
+  The control is unscored like the rest of the catalog.
+
 ## [2.1.0] - 2026-10-16
 
 ### Added
