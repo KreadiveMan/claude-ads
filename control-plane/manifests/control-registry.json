@@ -4260,6 +4260,31 @@
       }
     },
     {
+      "platform": "meta",
+      "control_id": "M73",
+      "intent": "Fake-winner attribution shift",
+      "disposition": "conditional_watchlist",
+      "source_claim_ids": [],
+      "control_definition": {
+        "schema_version": "1.0.0",
+        "control_id": "M73",
+        "category": "unclassified",
+        "severity": "informational",
+        "required_inputs": [
+          "applicability_context",
+          "current_account_evidence",
+          "current_source_support"
+        ],
+        "source_ids": [],
+        "maturity": "inventory-baselined",
+        "geographies": [
+          "account-configured"
+        ],
+        "scoring_behavior": "watchlist",
+        "stability": "experimental"
+      }
+    },
+    {
       "platform": "linkedin",
       "control_id": "L01",
       "intent": "Insight Tag installed",

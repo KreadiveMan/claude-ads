@@ -770,7 +770,7 @@ def test_release_grounding_gate_validates_control_registry_and_profiles() -> Non
     root = RELEASE_SCRIPT.parents[1]
     as_of = release.datetime.now(release.timezone.utc).date()
     result = check_grounding_and_capabilities(root, as_of)
-    assert result["registered_control_count"] == 414
+    assert result["registered_control_count"] == 415
     assert result["enabled_scoring_profile_count"] == 0
     assert result["disabled_scoring_profile_count"] == 12
 
@@ -826,7 +826,7 @@ def test_release_grounding_gate_accepts_evidence_on_both_window_boundaries(
     source_doc, claim_doc, _, _ = _ledgers_in_window(root, as_of, as_of)
     _serve_ledgers(monkeypatch, source_doc, claim_doc)
     result = check_grounding_and_capabilities(root, as_of)
-    assert result["registered_control_count"] == 414
+    assert result["registered_control_count"] == 415
 
 
 @pytest.mark.parametrize("verdict", ["provisional", "contested", "demoted", "retracted"])

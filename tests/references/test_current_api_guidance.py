@@ -80,3 +80,16 @@ def test_apple_and_meta_guidance_carry_dated_lifecycle_notes(repo_root):
     meta = _text(repo_root, "meta-audit.md")
     for fragment in ("`v26.0`", "2026-07-29", "2026-10-27", "`v24.0`", "advantage_audience"):
         assert fragment in meta
+
+
+def test_meta_fake_winner_control_requires_outside_meta_evidence(repo_root):
+    meta = _text(repo_root, "meta-audit.md")
+    assert "| M73 | Fake-winner attribution shift |" in meta
+    for fragment in (
+        "is an `inference`, not a `platform-stated` fact",
+        "Do not cite it as the source for this control",
+        "account-level totals from outside Meta do not rise",
+        "A holdout or lift test overrides the before/after reading",
+        "Do not prescribe a creative count",
+    ):
+        assert fragment in meta

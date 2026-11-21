@@ -134,6 +134,63 @@ The Pixel redundancy and deduplication wording (matching `event_id` and
 | M70 | Automotive market-code migration evidence | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
 | M71 | Digital Services Tax pass-through | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
 | M72 | CAPI one-click setup + EMQ | Unscored source-refresh discovery: verify current official availability, account eligibility, and governance need; non-adoption is never a failure. |
+| M73 | Fake-winner attribution shift | Conditional evidence control: establish applicability and evaluate from current account evidence; otherwise return `unknown` or `not_applicable`. |
+
+## M73 fake-winner attribution shift
+
+A new ad can show strong reported results while the account's total outcomes
+stay flat. When that happens, the new ad may have taken attribution from ads
+that were already converting rather than adding sales. This control asks
+whether a reported creative "winner" added outcomes. It does not ask whether
+the ad looks good in the ad-level report.
+
+The mechanism is an `inference`, not a `platform-stated` fact. Meta's Andromeda
+engineering post (`meta-andromeda-engineering-official`) documents retrieval and
+says ad diversity can improve outcomes. It does not document cold-start
+behaviour, warm-audience bias for new ads, or attribution displacement between
+ads. Do not cite it as the source for this control.
+
+Applicability: return `not_applicable` when no new ads launched in the window
+or the account has one active ad. Return `unknown` when any required input is
+missing.
+
+Required inputs:
+
+- Ad launch dates and status changes, and the budget for each comparison window.
+- Ad-level reported conversions and value, plus the same metrics for the ads
+  that were active before the launch.
+- Account-level totals from a source outside Meta's ad attribution (store,
+  CRM or backend orders, or blended spend efficiency such as MER) for the same windows.
+- Where available, new versus returning customers, or the share of delivery
+  and conversions from warm audiences (site visitors, engagers, existing
+  customers).
+- Any holdout, Meta lift study or geo test result covering the period.
+
+Evaluation:
+
+1. Compare the windows before and after the launch at equal or explained
+   budget, with lag-mature conversions and no major change in offer, price,
+   season or tracking.
+2. A pattern is `observed` only when it appears in the account data. The
+   pattern: new-ad reported conversions rise, previously active ads fall by a
+   similar amount, and account-level totals from outside Meta do not rise
+   beyond normal variation.
+3. When the new ad's early results come mainly from warm or returning
+   audiences, record that as evidence. Do not treat it as proof of
+   incrementality.
+4. A holdout or lift test overrides the before/after reading.
+
+Output:
+
+- Name the specific ads and windows. Label the conclusion `observed`,
+  `inference` or `unknown`. Never describe the reported winner as incremental
+  without an outside-Meta total or a lift result.
+- Recommend a reversible step. Examples: keep the stable ad running, judge the
+  launch wave on account totals, or run a holdout before scaling. Do not
+  prescribe a creative count, launch cadence or similarity threshold.
+- A repeated cycle is a planning finding, not a health score. The cycle: more
+  launches, new "winners", old ads "fatigued", reported efficiency falls,
+  account totals stay flat.
 
 ## Recommendation boundary
 
